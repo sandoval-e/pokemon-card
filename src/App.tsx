@@ -1,49 +1,40 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import config from './utils/Settings';
 import Card from './components/Card/Card';
 import Button from './components/Button';
-import type { PokemonData } from './types';
+import config from './utils/Settings';
+import { useFetch } from './utils/hooks/useFetch';
+import generateRandomId from './utils/generateRandomId';
 
 const App: React.FC = () => {
-  let min = 1;
-  let max = 150;
-  let pokemonImgUrl = config?.pokemonImgUrl;
-  let pokeApiUrl = config?.pokeApiUrl;
+  // fields
+  const pokeApiUrl = config?.pokeApiUrl;
 
+  // state
   const [pokemonId, setPokemonId] = useState<number>(1);
-  const [pokemonData, setPokemonData] = useState<PokemonData>({} as PokemonData);
-  const [pokemonImageUrl, setPokemonImageUrl] = useState<string>(pokemonImgUrl);
+
+  // fetch pokemon data
+  const { data, error, isLoading, refetch } = useFetch(`${pokeApiUrl}${pokemonId}`, {}, true);
 
   useEffect(() => {
-    getPokemonData();
-  }, [pokemonId]);
+    if(pokemonId > 0) {
+      refetch();
+    }
+  }, [pokemonId, refetch]);
 
   const getPokemonId = () => {
-    let pokemonId: number = Math.floor(Math.random() * (max - min + 1)) + min;
+    let pokemonId: number = generateRandomId();
     setPokemonId(pokemonId);
   };
 
-  const getPokemonData = () => {
-    fetch(`${pokeApiUrl}${pokemonId}`)
-      .then((response) => {
-        return response.json();
-      })
-      .then((response: PokemonData) => {
-        console.log("response", response);
-        setPokemonImageUrl(`${pokemonImgUrl}${pokemonId.toString()}.svg`);
-        setPokemonData(response);
-      })
-      .catch((error) => {
-        console.log("Error fetching data: ", error);
-      });
-  };
+  if(isLoading) return <div>Loading...</div>;
+  if(error) return <div>Error: {error}</div>;
 
   return (
     <main className="flex">
       <h1>Hello, Pokémon Trainer</h1>
       <article className="card">
-        <Card pokemonImgUrl={pokemonImageUrl} pokemonData={pokemonData} />
+        <Card pokemonData={data} />
       </article>
       <Button onClick={getPokemonId}>Click to see your pokedex!</Button>
     </main>
