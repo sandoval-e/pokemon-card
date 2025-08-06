@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import config from './common/Settings';
+import config from './utils/Settings';
 import Card from './components/Card/Card';
 import Button from './components/Button';
 import type { PokemonData } from './types';
