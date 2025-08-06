@@ -1,0 +1,6 @@
+const config = {
+    pokeApiUrl: "https://pokeapi.co/api/v2/pokemon/",
+    pokemonImgUrl: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/",
+}
+
+export default config;
