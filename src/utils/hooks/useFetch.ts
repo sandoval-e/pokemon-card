@@ -8,12 +8,12 @@ export function useFetch(
   options?: RequestOptions,
   autoFetch: boolean = true
 ) {
-  const [data, setData] = useState<PokemonData | null>(null);
+  const [data, setData] = useState<PokemonData>({} as PokemonData);
   const [error, setError] = useState<string | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchData = useCallback(async () => {
-    setLoading(true);
+    setIsLoading(true);
     setError(null);
 
     try 
@@ -29,9 +29,9 @@ export function useFetch(
     } 
     finally 
     {
-      setLoading(false);
+      setIsLoading(false);
     }
-  }, [url, JSON.stringify(options)]); // dependencia JSON.stringify para evitar referencias distintas
+  }, [url, JSON.stringify(options)]);
 
   useEffect(() => {
     if (autoFetch) {
@@ -39,5 +39,5 @@ export function useFetch(
     }
   }, [fetchData, autoFetch]);
 
-  return { data, error, loading, refetch: fetchData };
+  return { data, error, isLoading, refetch: fetchData };
 }

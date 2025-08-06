@@ -1,14 +1,14 @@
 import CardFooter from "./CardFooter";
 import type { PokemonData } from "../../types";
+import config from "../../utils/Settings";
 
 interface CardProps {
-  pokemonImgUrl: any;
   pokemonData: PokemonData;
 }
 
 const Card = (props: CardProps) => {
-  let pokemonImgUrl = props.pokemonImgUrl;
   const pokemonData = props.pokemonData;
+  const pokemonImageUrl = config?.pokemonImgUrl + pokemonData?.id?.toString() + ".svg";
 
   return (
     <>
@@ -18,7 +18,7 @@ const Card = (props: CardProps) => {
         />
         <div className="card-body">
             <img
-            src={pokemonImgUrl}
+            src={pokemonImageUrl}
             alt="Pokemon image"
             className="card-body-img"
             />
@@ -28,7 +28,7 @@ const Card = (props: CardProps) => {
                     {
                         pokemonData?.stats && pokemonData.stats.length > 0
                         ? pokemonData.stats[0].base_stat?.toString() + "hp"
-                        : ""
+                        : "-"
                     }
                 </span>
             </h1>
