@@ -1,5 +1,5 @@
-import Footer from "./Footer";
-import type { PokemonData } from "../types";
+import CardFooter from "./CardFooter";
+import type { PokemonData } from "../../types";
 
 interface CardProps {
   pokemonImgUrl: any;
@@ -35,7 +35,7 @@ const Card = (props: CardProps) => {
             <p className="card-body-text">{pokemonData?.base_experience}{" exp"}</p>
         </div>
         <div className="card-footer">
-            <Footer pokemonData={pokemonData} />
+            <CardFooter pokemonData={pokemonData} />
         </div>
     </>
   );

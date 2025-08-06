@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { useState, useEffect } from "react";
-import config from './Common/Settings';
-import Card from './Components/Card';
-import Button from './Components/Button';
+import config from './common/Settings';
+import Card from './components/Card/Card';
+import Button from './components/Button';
 import type { PokemonData } from './types';
 
 const App: React.FC = () => {

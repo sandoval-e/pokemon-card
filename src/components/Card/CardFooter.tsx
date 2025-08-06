@@ -1,10 +1,10 @@
-import type { PokemonData, Stat } from "../types";
+import type { PokemonData, Stat } from "../../types";
 
 interface FooterProps {
   pokemonData: PokemonData;
 }
 
-const Footer: React.FC<FooterProps> = (props: FooterProps) => {
+const CardFooter: React.FC<FooterProps> = (props: FooterProps) => {
   let stats: Stat[] | null = props.pokemonData.stats;
   const footerData = ["attack", "defense", "special-attack"];
   return (
@@ -21,4 +21,4 @@ const Footer: React.FC<FooterProps> = (props: FooterProps) => {
   );
 };
 
-export default Footer;
+export default CardFooter;
