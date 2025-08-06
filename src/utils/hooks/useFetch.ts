@@ -8,7 +8,7 @@ export function useFetch(
   options?: RequestOptions,
   autoFetch: boolean = true
 ) {
-  const [data, setData] = useState<PokemonData>({} as PokemonData);
+  const [data, setData] = useState({} as PokemonData);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
